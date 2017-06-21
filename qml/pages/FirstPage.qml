@@ -51,7 +51,7 @@ Page{
 
 
     function appModel(result){
-        console.log(result);
+//        console.log(result);
         for ( var i in result){
             bloglistModel.append({
                                     "href":result[i].href,
@@ -93,7 +93,7 @@ Page{
         id:view
         header: PageHeader {
             id:header
-            title: qsTr("Cnbeta")
+            title: appname
         }
         anchors.fill: parent
         PullDownMenu{
@@ -120,7 +120,7 @@ Page{
         delegate:
             BackgroundItem{
             id:showlist
-            height:titleid.height+timeid.height+summaryid.height+Theme.paddingMedium*4
+            height:titleid.height+summaryid.height+Theme.paddingMedium*4
             width: parent.width
             Label{
                 id:titleid
@@ -142,7 +142,11 @@ Page{
 
             Label{
                 id:summaryid
-                text:intro.replace(/(<[\/]?strong>)|(<[\/]?p>)/g,"")
+                text:{
+                    var b = href.split("/");
+                    return "发布时间 : " + b[2] +"-"+b[3]+"-"+b[4]
+                }
+
                 textFormat: Text.StyledText
                 font.pixelSize: Theme.fontSizeExtraSmall
                 wrapMode: Text.WordWrap
@@ -165,7 +169,7 @@ Page{
                 color: Theme.highlightColor
             }
             onClicked: {
-                pageStack.push(Qt.resolvedUrl("NewsDetail.qml"),{
+                pageStack.push(Qt.resolvedUrl("BlogDetail.qml"),{
                                    "article":article,
                                    "href":href
                                });

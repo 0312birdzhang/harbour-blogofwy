@@ -37,12 +37,13 @@ ApplicationWindow
 {
 
     id:appwindow
+    property string appname: "王垠博客"
     allowedOrientations: Orientation.Landscape | Orientation.Portrait | Orientation.LandscapeInverted
 
 
     Notification{
         id:notification
-        appName: "CnBeta"
+        appName: appname
     }
 
     function formathtml(html){
@@ -51,8 +52,8 @@ ApplicationWindow
        html=html.replace(/<p>/g,"<p style='text-indent:24px'>");
        html=html.replace(/<p style='text-indent:24px'><img/g,"<p><img");
        html=html.replace(/<p style='text-indent:24px'><a [^<>]*href=\"([^<>"]*)\".*?><img/g,"<p><a href='$1'><img");
-       html=html.replace(/<img src=\"([^<>"]*)\".*?>/g,"<a href='$1.showimg'><img src=\"$1\" width="+(Screen.width-Theme.paddingMedium*2)+"/></a>");//$&</a>");
-       html=html.replace(/<img src/g,"<img src='default.jpg' x-src");
+       html=html.replace(/<img src=\"([^<>"]*)\".*?>/g,"<a href='$1.showimg'><img src=\"$1\" width="+(Screen.width-Theme.paddingMedium*4)+"/></a>");//$&</a>");
+//       html=html.replace(/<img src/g,"<img src='default.jpg' x-src");
 //        html=html.replace(/<p><img /g,"<p style='text-indent:-10px'><img width="+Screen.width+" ");
 //        html=html.replace(/<img /g,"<img style='max-width:"+Screen.width+";margin-left:-10px;' ");
 
@@ -63,7 +64,7 @@ ApplicationWindow
     }
 
     function showMsg(message) {
-        notification.previewBody = "Cnbeta";
+        notification.previewBody = appname;
         notification.previewSummary = message;
         notification.close();
         notification.publish();
@@ -71,10 +72,13 @@ ApplicationWindow
 
     cover: CoverBackground {
         CoverPlaceholder{
-            icon.source: "cover/icon.png"
-            text:"Cnbeta"
+            icon.source: "image://theme/harbour-blogofwy"
+            text:appname
+            icon.width: parent.width/2.5
+            icon.height: icon.width
         }
     }
+
 
 
 }

@@ -39,4 +39,4 @@ def blogdetail(url):
     html = query(BLOG_URL+url)
     soup = BeautifulSoup(html,"html.parser")
     for i in soup.find_all("div",attrs={"style":"padding: 2% 8% 5% 8%; border: 1px solid LightGrey;"}):
-        return i.get_text().encode("utf-8")
+        return i.prettify().encode("utf-8")

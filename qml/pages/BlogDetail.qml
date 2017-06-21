@@ -23,7 +23,6 @@ Page{
         function loadDetail(href){
             progress.running = true;
             detailpy.call('main.blogdetail',[href],function(result){
-                result= eval('(' + result + ')');
                 content = result;
                 progress.running = false;
             })
@@ -43,6 +42,13 @@ Page{
         anchors.centerIn: parent
     }
 
+    Image{
+        id:contentImg
+        visible: false
+
+    }
+
+
     SilicaFlickable {
         id:view
         visible: PageStatus.Active
@@ -61,7 +67,7 @@ Page{
             id:detail
             y:header.height
             width:blogDetail.width
-            height: detailtime.height+fromMsg.height+contentbody.height+header.height+detaileditor.height+Theme.paddingLarge*5
+            height: detailtime.height+contentbody.height+header.height+Theme.paddingLarge*5
             Label{
                 id:detailtime
                 text:{
@@ -84,8 +90,8 @@ Page{
             Label{
                 id:contentbody
                 opacity: 0.8
-                textFormat: Text.RichText
-                text:content
+//                textFormat: Text.RichText
+                text:formathtml(content)
                 font.pixelSize: Theme.fontSizeExtraSmall
                 wrapMode: Text.WordWrap
                 linkColor:Theme.primaryColor
