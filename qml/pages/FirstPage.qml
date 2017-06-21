@@ -35,7 +35,6 @@ Page{
     id:showBlogs
 
     property int operationType: PageStackAction.Animated
-    property int fromArticleID
     property int page:1
     allowedOrientations: Orientation.Landscape | Orientation.Portrait | Orientation.LandscapeInverted
 
@@ -50,11 +49,9 @@ Page{
     }
  
 
-    function clearModel(){
-        bloglistModel.clear();
-    }
 
     function appModel(result){
+        console.log(result);
         for ( var i in result){
             bloglistModel.append({
                                     "href":result[i].href,
@@ -62,6 +59,7 @@ Page{
                                 });
 
                        }
+      view.model  = bloglistModel;
     }
     
 
@@ -70,14 +68,13 @@ Page{
         Component.onCompleted: {
             addImportPath(Qt.resolvedUrl('../py'));
             py.importModule('main', function () {
-                py.loadBlogs(page);
+                py.loadBlogs();
              });
 
         }
         function loadBlogs(){
             progress.running = true;
             py.call('main.bloglist',[],function(result){
-                result= eval('(' + result + ')');
                 appModel(result);
                 progress.running = false;
             });
@@ -119,7 +116,6 @@ Page{
         }
 
         clip: true
-        model : bloglistModel
         //spacing:Theme.paddingMedium
         delegate:
             BackgroundItem{
