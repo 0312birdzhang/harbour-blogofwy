@@ -3,12 +3,4 @@
      <param name="repourl">https://github.com/0312birdzhang/harbour-blogofwy.git</param>
      <param name="branch">master</param>
    </service>
-   <service name="tar_git">
-   <param name="url">https://github.com/0312birdzhang/harbour-blogofwy.git</param>
-   <param name="branch">master</param>
-   <param name="revision">6887a09d460fcefdea63cad0809126bbf560a2ea</param>
-   <param name="token"/>
-   <param name="debian">N</param>
-   <param name="dumb">N</param>
-   </service>
 </services>
